@@ -1,0 +1,24 @@
+<script>
+    let n = prompt("enter a number for prime number");
+    n=parseInt(n);
+    let count=0;
+if(n<2){
+    document.write("not a prime number its whole number");
+}
+
+else{
+    for(let i=2;i<=n;i++){
+        if(n % i == 0){
+            count++;
+              
+        }}
+        //  document.write(count);
+        if(count==1){
+            document.write(n +"is prime number");
+        }
+        if(count>1){
+            document.write(n +"not a  prime number");
+        }
+           }
+        
+</script>
