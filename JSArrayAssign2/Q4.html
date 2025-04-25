@@ -1,0 +1,44 @@
+<script>
+    let input =[
+        {
+            name:  "john",
+            age : 13,
+        },
+        {
+            name : "Mark",
+            age : 56,
+        },
+        {
+            name : "Rachel",
+            age : 45,
+        },
+        {
+            name : "Nate",
+            age : 67,
+        },
+        {
+            name : "Jennifer",
+            age : 65
+        } 
+    ];
+    let arr=[];
+    let min= input[0].age;
+    let max= input[0].age;
+    
+    for(let mn of input){
+        if(mn.age<min){
+            min =mn.age; 
+        }
+
+    }
+    arr.push(min);
+    for(let mx of input){
+        if(mx.age>max){
+            max =mx.age; 
+        }
+}
+arr.push(max);
+arr.push(max-min);
+document.write(arr);
+document.write
+</script>

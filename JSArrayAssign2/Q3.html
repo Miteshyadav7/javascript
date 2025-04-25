@@ -1,0 +1,17 @@
+<!-- The given input is a string of multiple words with a single space between each of them. Abbreviate the name and return the name initials.
+
+const input = "George Raymond Richard Martin";
+output :- "GRRM"; -->
+                    
+            <script>
+                let input = prompt("enter a sentence");
+
+                const initial = input.split(" ");
+            let words = "";
+            for(const word of initial){
+                words=words+word.charAt(0);
+            }
+            document.write(words); 
+
+
+            </script>

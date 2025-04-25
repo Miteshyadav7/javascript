@@ -1,0 +1,17 @@
+<!-- [10,20,30]
+[100,400,900] -->
+
+<script>
+    let m = prompt("enter how much number to store")
+    let arr=[];
+    for(let i=0;i<m;i++){
+    let n = prompt("enter  a number");
+     
+     arr.push(n);
+    
+    }
+  let result = arr.map((ele)=> {
+    return ele*ele;
+  });
+  document.write(result);
+  </script>
