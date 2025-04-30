@@ -1,0 +1,13 @@
+
+            <script>
+                let input = prompt("enter a sentence");
+
+                const initial = input.split(" ");
+            let words = "";
+            for(const word of initial){
+                words=words+word.charAt(0);
+            }
+            document.write(words); 
+
+
+            </script>
