@@ -1,0 +1,26 @@
+<script>
+    
+    function dat(){
+         this.x = 100;
+        this.f1=() => {
+            console.log(this.x);
+        }
+        this.f2=() => {
+            console.log(this.x);
+        }
+        this.f3=() => {
+            console.log(this.x);
+            privatemethod();
+        }
+        const privatemethod=()=>{
+      
+            console.log("hello");
+        }
+console.log("hello bhai")
+    }
+let obj = new dat();
+obj.f1();  
+obj.f2();  
+obj.f3();  
+
+</script>
