@@ -1,0 +1,13 @@
+<select id="fruitSelect">
+    <option value="apple">Apple</option>
+    <option value="banana">Banana</option>
+    <option value="Mango">Mango</option>
+
+</select>
+  <button onclick="getFruit()">Get Fruit</button>
+  <script>
+    function getFruit() {
+      const fruit = document.getElementById("fruitSelect").value;
+      console.log("Selected fruit:", fruit);
+    }
+  </script>
