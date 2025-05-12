@@ -1,0 +1,26 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+      
+        <div>
+            <button onclick=" mode(1)" id="dark" style="background-color: black; color :aliceblue">Darkmode</button> 
+            <button onclick="mode(0)"id="light">Lightmode</button>
+        </div>
+      <script>
+             
+    function mode(n){
+        if(n==1){
+        document.querySelector("body").style.backgroundColor="black";
+        }
+        else{
+
+            document.querySelector("body").style.backgroundColor="white";
+        }
+
+    }
+    
+</script>
+    </body>
+</html>
