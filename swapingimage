@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <center>
+<img id= "main" src ="istockphoto-184276818-612x612.jpg" width = "400" length ="300"
+        </center>
+<center>
+<img id="1" onclick="imageswap(this)" src ="10000025_32-fresho-banana-robusta (1).webp" width ="150" length="150">
+<img id="2" onclick="imageswap(this)" src ="istockphoto-184276818-612x612.jpg" width ="150" length="150">
+<img id="3" onclick="imageswap(this)" src ="10000025_32-fresho-banana-robusta (1).webp" width ="150" length="150">
+</center>
+<script>
+    function imageswap(n){
+        let mainimage = document.getElementById("main");
+        let temp = mainimage.src;
+        mainimage.src = n.src;
+        n.src = temp; 
+    }
+</script> 
+</body>
+</html>
