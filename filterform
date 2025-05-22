@@ -1,0 +1,141 @@
+let class1 = [  
+    { id: 1, rollno: "101", name: "aman", branch: "CSE", admissionYear: 2021 },
+    { id: 2, rollno: "102", name: "raman", branch: "ECE", admissionYear: 2022 },
+    { id: 3, rollno: "103", name: "mitesh", branch: "IT", admissionYear: 2022 },
+    { id: 4, rollno: "104", name: "suresh", branch: "IT", admissionYear: 2023 },
+    { id: 5, rollno: "105", name: "rakesh", branch: "CSE", admissionYear: 2024 },
+];
+    
+function setdata() { 
+    localStorage.setItem("class",JSON.stringify(class1));
+}
+function fetchdata() {
+    let fetched_std = JSON.parse(localStorage.getItem("class"));
+    return fetched_std;
+}
+function dropdowns(){
+    let selectedYear = null;
+    let selectedBranch = null;
+
+    let year_dropdown = document.createElement("select")
+    year_dropdown.setAttribute('style','margin:10px;border: 2px solid black;border-radius:5px;font-size:15px;padding:10px')
+    let year_option = document.createElement("option")
+    year_option.text = "Admission Year"
+    year_option.value = "";
+    year_dropdown.appendChild(year_option)
+
+   for (let year = 2000; year <= 2025; year++) {
+    let option = document.createElement("option");
+    option.value = year;
+    option.text = year;
+    year_dropdown.appendChild(option);
+   }
+
+   let branches = ["IT","CSE","ECE"]
+    let branch_dropdown = document.createElement("select")
+    branch_dropdown.setAttribute('style','margin:10px;border: 2px solid black;border-radius:5px;font-size:15px;padding:10px')
+    let branch_option = document.createElement("option")
+    branch_option.text = "Branch"
+    branch_option.value = "";
+    branch_dropdown.appendChild(branch_option)
+
+    branches.forEach(b => {
+        let option = document.createElement("option");
+        option.text = b
+        option.value=b
+        branch_dropdown.appendChild(option) 
+    });
+
+    header.setAttribute('class','d-flex justify-content-center ')
+    header.setAttribute('style','padding:20px')
+    header.appendChild(year_dropdown)
+    header.appendChild(branch_dropdown)
+
+    function updateGrid() {
+        selectedYear = year_dropdown.value  || null;
+        selectedBranch = branch_dropdown.value || null;
+        main.innerHTML = "";
+        cardGrid(selectedYear, selectedBranch);
+    }
+
+    year_dropdown.addEventListener("change", updateGrid);
+    branch_dropdown.addEventListener("change", updateGrid);
+}
+function cardGrid(selectedyear = null,selectedbranch = null) {
+   let fstd=fetchdata();  
+   if (selectedyear !== null && selectedbranch == null) {
+    fstd = fstd.filter(std => std.admissionYear == selectedyear)
+   }
+   else if (selectedyear == null && selectedbranch !== null) {
+    fstd = fstd.filter(std => std.branch == selectedbranch)
+   }
+   else if (selectedyear !== null && selectedbranch !== null) {
+    fstd = fstd.filter(std => std.branch == selectedbranch && std.admissionYear == selectedyear)
+   }
+
+
+   fstd.forEach(std => {
+     let cardbody = document.createElement("div");
+     cardbody.setAttribute("style","height:200px;width:200px;box-shadow:10px grey; border:1px solid grey;padding:20px;margin:15px;border-radius:30px;");
+     
+     let content_table = document.createElement("table");
+     content_table.innerHTML=
+     `<tr><td><h5>${std.name}</h5></td></tr>
+      <tr><td>${std.id}</td><td>${std.rollno}</td></tr>
+      <tr><td>${std.branch}<td><td>${std.admissionYear}</td></tr>`
+     let edtbtn = document.createElement("button")
+     edtbtn.innerHTML="Edit"
+     edtbtn.setAttribute("class","btn btn-success gap-2") ;
+     edtbtn.setAttribute("style","margin:10px")
+     edtbtn.addEventListener("click",()=>{
+        editform(std.id,std.name,std.rollno,std.branch,std.admissionYear);
+     })
+
+      let dltbtn = document.createElement("button")
+     dltbtn.innerHTML="Delete"
+     dltbtn.setAttribute("class","btn btn-primary gap-2") ;
+     dltbtn.addEventListener("click",(event)=>{
+        event.preventDefault()
+        deletestd(std.id);
+     })
+
+     cardbody.appendChild(content_table)
+     cardbody.appendChild(edtbtn)
+     cardbody.appendChild(dltbtn)
+     main.appendChild(cardbody);
+  });  
+}
+function editform(id,pname,prollno,pbranch,padmyr){
+    let form = document.createElement("form")
+    form.setAttribute("style","margin : 20px;padding:20px;width:50%; color:red;")
+    form.innerHTML=`<input id="editName" value="${pname}" placeholder="Name" class="form-control mb-2" />
+    <input id="editRoll"  value="${prollno}" placeholder="Roll No." class="form-control mb-2" readonly />
+    <input id="editBranch" value="${pbranch}" placeholder="Branch" class="form-control mb-2" />
+    <input id="editYear" value="${padmyr}" placeholder="Year" class="form-control mb-2" />
+    <button id="updateBtn" class="btn btn-success " style="width:100%">Update</button>`;
+    main.innerHTML=""
+    main.appendChild(form)
+
+    form.addEventListener("submit",(event)=>{
+       event.preventDefault()
+        let students = fetchdata();
+        let index = students.findIndex(std => std.id === id);
+        
+        students[index].name = document.getElementById("editName").value;
+        students[index].branch =  document.getElementById("editBranch").value;
+        students[index].admissionYear =  document.getElementById("editYear").value; 
+      
+        localStorage.setItem("class",JSON.stringify(students))
+        form.remove();
+        document.getElementById("main").innerHTML = "";
+        cardGrid();
+    })
+}
+function deletestd(id){      
+        let students = fetchdata();
+        let index = students.findIndex(std => std.id === id); 
+        students.splice(index,1);
+        localStorage.setItem("class",JSON.stringify(students))
+        document.getElementById("main").innerHTML = "";
+        cardGrid();
+}
