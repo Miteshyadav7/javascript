@@ -1,0 +1,14 @@
+import express from "express"
+import { Vehicle } from "../model/vehicle.model";
+
+export let home = (req,res,next)=>{
+    return res.render("index.ejs");
+}
+
+export const save_in_bulk = (req,res)=>{
+    let list = req.body;
+    for(let s of list){
+        let user = new Vehicle(s.name,s.model,s.year,s.fuel,s.seating,s.ac,s.charge);
+     }
+
+}
